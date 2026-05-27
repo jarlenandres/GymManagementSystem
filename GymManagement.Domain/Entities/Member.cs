@@ -19,7 +19,7 @@ public class Member : AuditBase
 
 
     // ==== Navigation Properties ==
-    public ICollection<Membership> Memberships { get; set; } = new List<Membership>();
-    public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
-    public Headquarters Headquarters { get; set; } = null!;
+   // public ICollection<Membership> Memberships { get; set; } = new List<Membership>();
+   // public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
+   // public Headquarters Headquarters { get; set; } = null!;
 }

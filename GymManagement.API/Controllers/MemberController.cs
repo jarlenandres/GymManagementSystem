@@ -70,4 +70,70 @@ public class MemberController : ControllerBase
             return Conflict(new { message = ex.Message });
         }
     }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Update(int id, MemberResponseDTO dto)
+    {
+        try
+        {
+            var member = _mapper.Map<Member>(dto);
+            await _memberService.UpdateAsync(id, member);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new {message = ex.Message});
+        }
+    }
+
+    [HttpPut("{document}")]
+    public async Task<ActionResult> UpdateDocument(int document, MemberResponseDTO dto)
+    {
+        try
+        {
+            var member = _mapper.Map<Member>(dto);
+            await _memberService.UpdateAsync(document, member);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Conflict(new {message = ex.Message});
+        }
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        try
+        {
+            await _memberService.DeleteAsync(id);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new {message = ex.Message});
+        }
+    }
+
+    [HttpDelete("{document}")]
+    public async Task<ActionResult> DeleteForDocumento(int document)
+    {
+        try
+        {
+            await _memberService.DeleteAsync(document);
+            return NoContent();
+        }
+        catch (KeyNotFoundException ex)
+        {
+            return NotFound(new { message = ex.Message });
+        }
+    }
 }

@@ -34,6 +34,18 @@ public class MemberService : IMemberService
         return member;
     }
 
+    public async Task<Member?> GetByDocumentAsync(int document)
+    {
+        _logger.LogInformation("Getting member by documeto: {Document}", document);
+        var member = await _memberRepository.GetByDocument(document);
+
+        if (member == null)
+        {
+            _logger.LogWarning("Member with document {Document not found}", document);
+        }
+        return member;
+    }
+
     public async Task<Member?> CreateAsync(Member member)
     {
         // Validación de negocio, que el documento no se repita
@@ -90,4 +102,6 @@ public class MemberService : IMemberService
         _logger.LogInformation("Deleting member with id: {Id}", id);
         await _memberRepository.DeleteAsync(id);
     }
+
+   
 }
